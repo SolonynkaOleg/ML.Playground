@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softvision.ML.NET.Playground", "Softvision.ML.NET.Playground\Softvision.ML.NET.Playground.csproj", "{6130CDBF-3010-48D6-A80E-3F967A6F3A7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softvision.ML.NET.Playground.CreditScoring", "Softvision.ML.NET.Playground.CreditScoring\Softvision.ML.NET.Playground.CreditScoring.csproj", "{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6130CDBF-3010-48D6-A80E-3F967A6F3A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6130CDBF-3010-48D6-A80E-3F967A6F3A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6130CDBF-3010-48D6-A80E-3F967A6F3A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6130CDBF-3010-48D6-A80E-3F967A6F3A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31789001-051A-44C9-86A5-CBA6BC72EB62}
+	EndGlobalSection
+EndGlobal
