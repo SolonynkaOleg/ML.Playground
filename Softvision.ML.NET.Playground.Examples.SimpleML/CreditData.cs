@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Softvision.ML.NET.Playground.CreditScoring.DataStructures
+namespace Softvision.ML.NET.Playground.Examples.SimpleML
 {
-    public class ObligorData
+    public class CreditData
     {
         [LoadColumn(0)]
         public string Male { get; set; }

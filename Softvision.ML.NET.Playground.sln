@@ -1,11 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softvision.ML.NET.Playground", "Softvision.ML.NET.Playground\Softvision.ML.NET.Playground.csproj", "{6130CDBF-3010-48D6-A80E-3F967A6F3A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softvision.ML.NET.Playground.CreditScoring", "Softvision.ML.NET.Playground.CreditScoring\Softvision.ML.NET.Playground.CreditScoring.csproj", "{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softvision.ML.NET.Playground.CreditScoring", "Softvision.ML.NET.Playground.CreditScoring\Softvision.ML.NET.Playground.CreditScoring.csproj", "{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softvision.ML.NET.PlaygroundML.Model", "Softvision.ML.NET.PlaygroundML.Model\Softvision.ML.NET.PlaygroundML.Model.csproj", "{010B475C-5999-44AF-8253-ECCBE5540863}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softvision.ML.NET.PlaygroundML.ConsoleApp", "Softvision.ML.NET.PlaygroundML.ConsoleApp\Softvision.ML.NET.PlaygroundML.ConsoleApp.csproj", "{10148B27-1A1A-47F1-ACEF-CDAF3AC6FC75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{94D1435D-44E7-486D-B3FC-243AF2E48A04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{D4493173-FB7F-4324-8615-D7CA581CA90C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softvision.ML.NET.Playground.Examples.SimpleML", "Softvision.ML.NET.Playground.Examples.SimpleML\Softvision.ML.NET.Playground.Examples.SimpleML.csproj", "{841ECDCE-4DD6-43D4-AAE1-55AB7062FE88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +31,28 @@ Global
 		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010B475C-5999-44AF-8253-ECCBE5540863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010B475C-5999-44AF-8253-ECCBE5540863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010B475C-5999-44AF-8253-ECCBE5540863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010B475C-5999-44AF-8253-ECCBE5540863}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10148B27-1A1A-47F1-ACEF-CDAF3AC6FC75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10148B27-1A1A-47F1-ACEF-CDAF3AC6FC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10148B27-1A1A-47F1-ACEF-CDAF3AC6FC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10148B27-1A1A-47F1-ACEF-CDAF3AC6FC75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841ECDCE-4DD6-43D4-AAE1-55AB7062FE88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841ECDCE-4DD6-43D4-AAE1-55AB7062FE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841ECDCE-4DD6-43D4-AAE1-55AB7062FE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841ECDCE-4DD6-43D4-AAE1-55AB7062FE88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6130CDBF-3010-48D6-A80E-3F967A6F3A7E} = {94D1435D-44E7-486D-B3FC-243AF2E48A04}
+		{A1F8079A-0A98-44F3-8F34-F7A90BCEECDD} = {94D1435D-44E7-486D-B3FC-243AF2E48A04}
+		{010B475C-5999-44AF-8253-ECCBE5540863} = {94D1435D-44E7-486D-B3FC-243AF2E48A04}
+		{10148B27-1A1A-47F1-ACEF-CDAF3AC6FC75} = {94D1435D-44E7-486D-B3FC-243AF2E48A04}
+		{841ECDCE-4DD6-43D4-AAE1-55AB7062FE88} = {D4493173-FB7F-4324-8615-D7CA581CA90C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {31789001-051A-44C9-86A5-CBA6BC72EB62}

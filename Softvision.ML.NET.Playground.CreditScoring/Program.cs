@@ -1,4 +1,5 @@
-﻿using Microsoft.ML;
+﻿using Common;
+using Microsoft.ML;
 using Microsoft.ML.Data;
 using Softvision.ML.NET.Playground.CreditScoring.DataStructures;
 using System;
@@ -11,9 +12,14 @@ namespace Softvision.ML.NET.Playground.CreditScoring
     {
         static void Main(string[] args)
         {
+            Run();
+        }
+
+        public static void Run()
+        {
             MLContext mlContext = new MLContext();
 
-            IDataView data = mlContext.Data.LoadFromTextFile<ObligorData>("cdx.data.csv", separatorChar: ',');
+            IDataView data = mlContext.Data.LoadFromTextFile<ObligorData>("crx.data.csv", separatorChar: ',');
 
             var dataSplit = mlContext.Data.TrainTestSplit(data, testFraction: 0.2);
             IDataView trainData = dataSplit.TrainSet;
@@ -37,47 +43,51 @@ namespace Softvision.ML.NET.Playground.CreditScoring
                 nameof(ObligorData.Income)
             };
 
-            var dataProcessPipeline = mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.Male))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.Married)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.BankCustomer)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.EducationLevel)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.Ethnicity)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.PriorDefault)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.Employed)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.DriversLicense)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.Citizen)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.ZipCode)))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding(nameof(ObligorData.Approved)))
+            var keyColumnName = nameof(ObligorData.Approved);
+
+            var dataProcessPipeline = mlContext.Transforms.Categorical.OneHotEncoding(
+                new[] {
+                    new InputOutputColumnPair(nameof(ObligorData.Male)),
+                    new InputOutputColumnPair(nameof(ObligorData.Married)),
+                    new InputOutputColumnPair(nameof(ObligorData.BankCustomer)),
+                    new InputOutputColumnPair(nameof(ObligorData.EducationLevel)),
+                    new InputOutputColumnPair(nameof(ObligorData.Ethnicity)),
+                    new InputOutputColumnPair(nameof(ObligorData.PriorDefault)),
+                    new InputOutputColumnPair(nameof(ObligorData.Employed)),
+                    new InputOutputColumnPair(nameof(ObligorData.DriversLicense)),
+                    new InputOutputColumnPair(nameof(ObligorData.Citizen)),
+                    new InputOutputColumnPair(nameof(ObligorData.ZipCode))
+                })
+                .Append(mlContext.Transforms.ReplaceMissingValues(new[] {
+                                          new InputOutputColumnPair(nameof(ObligorData.Age)),
+                                          new InputOutputColumnPair(nameof(ObligorData.ZipCode))
+                                      }))
                 .Append(mlContext.Transforms.Concatenate("Features", featureNames))
                 .Append(mlContext.Transforms.NormalizeMinMax("Features"))
-                .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "KeyColumn", inputColumnName: nameof(ObligorData.Approved)))
                 .AppendCacheCheckpoint(mlContext);
 
-            var trainer = mlContext.BinaryClassification.Trainers.SdcaLogisticRegression(labelColumnName: "KeyColumn", featureColumnName: "Features");
+            var trainer = mlContext.BinaryClassification.Trainers.LbfgsLogisticRegression(labelColumnName: keyColumnName, featureColumnName: "Features");
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 
             ITransformer trainedModel = trainingPipeline.Fit(trainData);
 
             var predictions = trainedModel.Transform(testData);
-            var metrics = mlContext.MulticlassClassification.Evaluate(predictions, "Label", "Score");
+            var metrics = mlContext.BinaryClassification.Evaluate(predictions, keyColumnName, "Score");
 
             PrintMultiClassClassificationMetrics(trainer.ToString(), metrics);
             Console.ReadKey();
         }
 
-        public static void PrintMultiClassClassificationMetrics(string name, MulticlassClassificationMetrics metrics)
+        public static void PrintMultiClassClassificationMetrics(string name, CalibratedBinaryClassificationMetrics metrics)
         {
             Console.WriteLine($"************************************************************");
             Console.WriteLine($"*    Metrics for {name} multi-class classification model   ");
             Console.WriteLine($"*-----------------------------------------------------------");
-            Console.WriteLine($"    AccuracyMacro = {metrics.MacroAccuracy:0.####}, a value between 0 and 1, the closer to 1, the better");
-            Console.WriteLine($"    AccuracyMicro = {metrics.MicroAccuracy:0.####}, a value between 0 and 1, the closer to 1, the better");
+            Console.WriteLine($"    AccuracyMacro = {metrics.Accuracy:0.####}, a value between 0 and 1, the closer to 1, the better");
             Console.WriteLine($"    LogLoss = {metrics.LogLoss:0.####}, the closer to 0, the better");
-            Console.WriteLine($"    LogLoss for class 1 = {metrics.PerClassLogLoss[0]:0.####}, the closer to 0, the better");
-            Console.WriteLine($"    LogLoss for class 2 = {metrics.PerClassLogLoss[1]:0.####}, the closer to 0, the better");
-            Console.WriteLine($"    LogLoss for class 3 = {metrics.PerClassLogLoss[2]:0.####}, the closer to 0, the better");
             Console.WriteLine($"************************************************************");
         }
     }
 }
+
